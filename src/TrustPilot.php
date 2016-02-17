@@ -1,4 +1,6 @@
-<?php namespace LukeRodham\TrustPilot;
+<?php
+
+namespace LukeRodham\TrustPilot;
 
 use LukeRodham\TrustPilot\Sections\Reviews;
 

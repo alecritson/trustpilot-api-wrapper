@@ -1,4 +1,6 @@
-<?php namespace LukeRodham\TrustPilot;
+<?php
+
+namespace LukeRodham\TrustPilot;
 
 use GuzzleHttp\Client;
 use LukeRodham\TrustPilot\Exceptions\InvalidApiCredentialsException;
@@ -40,9 +42,9 @@ class ApiWrapper
      */
     public function __construct($apiKey, $businessUnitId = '', $email = '', $password = '')
     {
-        $this->apiKey   = $apiKey;
-        $this->email    = $email;
-        $this->password = $password;
+        $this->apiKey         = $apiKey;
+        $this->email          = $email;
+        $this->password       = $password;
         $this->businessUnitId = $businessUnitId;
 
         $this->client = new Client(['base_uri' => $this->baseUri]);

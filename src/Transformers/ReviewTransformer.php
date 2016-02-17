@@ -115,7 +115,6 @@ class ReviewTransformer
         $transformedData = [];
 
         foreach ($reviews['reviews'] as $review) {
-
             $transformedData[] = $this->transform($review);
         }
 

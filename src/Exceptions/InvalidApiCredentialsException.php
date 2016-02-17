@@ -1,4 +1,6 @@
-<?php namespace LukeRodham\TrustPilot\Exceptions;
+<?php
+
+namespace LukeRodham\TrustPilot\Exceptions;
 
 use Exception;
 

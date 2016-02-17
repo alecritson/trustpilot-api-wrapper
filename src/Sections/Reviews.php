@@ -1,4 +1,6 @@
-<?php namespace LukeRodham\TrustPilot\Sections;
+<?php
+
+namespace LukeRodham\TrustPilot\Sections;
 
 use LukeRodham\TrustPilot\ApiWrapper;
 use LukeRodham\TrustPilot\Transformers\ReviewTransformer;
