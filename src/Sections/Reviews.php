@@ -43,4 +43,44 @@ class Reviews
 
         return (new ReviewTransformer())->transformArray($reviews);
     }
+
+    /**
+     * @param array $queryParams
+     *
+     * @return float
+     */
+    public function getTrustScore($queryParams = [])
+    {
+        $url = '/v1/business-units/' . $this->client->getBusinessUnitId();
+
+        $ratings = $this->client->getClient()->request(
+            'GET',
+            $url,
+            array_merge($this->client->getDefaultHeaders(), ['query' => $queryParams])
+        );
+
+        $data = json_decode($ratings->getBody()->getContents(), true);
+
+        return $data['trustScore'];
+    }
+
+    /**
+     * @param array $queryParams
+     *
+     * @return mixed
+     */
+    public function getStarRating($queryParams = [])
+    {
+        $url = '/v1/business-units/' . $this->client->getBusinessUnitId();
+
+        $ratings = $this->client->getClient()->request(
+            'GET',
+            $url,
+            array_merge($this->client->getDefaultHeaders(), ['query' => $queryParams])
+        );
+
+        $data = json_decode($ratings->getBody()->getContents(), true);
+
+        return $data['stars'];
+    }
 }
