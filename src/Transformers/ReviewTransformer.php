@@ -149,7 +149,7 @@ class ReviewTransformer
     public function transform($review)
     {
         $reviewObj = new self;
-        $reviewObj->setReview($review['title']);
+        $reviewObj->setTitle($review['title']);
         $reviewObj->setReview($review['text']);
         $reviewObj->setCompanyReply($review['companyReply']['text']);
         $reviewObj->setRating($review['stars']);
