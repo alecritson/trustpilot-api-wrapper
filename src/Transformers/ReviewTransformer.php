@@ -7,6 +7,10 @@ class ReviewTransformer
     /**
      * @var
      */
+    private $title;
+    /**
+     * @var
+     */
     private $review;
     /**
      * @var
@@ -24,6 +28,22 @@ class ReviewTransformer
      * @var
      */
     private $rating;
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $review
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
     /**
      * @return mixed
@@ -129,6 +149,7 @@ class ReviewTransformer
     public function transform($review)
     {
         $reviewObj = new self;
+        $reviewObj->setTitle($review['title']);
         $reviewObj->setReview($review['text']);
         $reviewObj->setCompanyReply($review['companyReply']['text']);
         $reviewObj->setRating($review['stars']);
