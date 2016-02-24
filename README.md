@@ -11,4 +11,7 @@ include $dir . '/vendor/autoload.php';
    
 $trustPilot = new \LukeRodham\TrustPilot\TrustPilot($apikey = '');
 $reviews    = $trustPilot->reviews()->latest(['language' => 'en']);
+$starRating = $trustPilot->reviews()->getStarRating();
+$numberOfReviews = $trustPilot()->reviews()->getTotalNumberOfReviews();
+$trustScore = $trustPilot()->reviews()->getTrustScore();
 ```
