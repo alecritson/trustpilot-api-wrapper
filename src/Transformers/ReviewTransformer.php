@@ -30,19 +30,16 @@ class ReviewTransformer
     private $rating;
 
     /**
+     * @var
+     */
+    private $author;
+
+    /**
      * @return mixed
      */
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * @param mixed $review
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
     }
 
     /**
@@ -54,27 +51,11 @@ class ReviewTransformer
     }
 
     /**
-     * @param mixed $review
-     */
-    public function setReview($review)
-    {
-        $this->review = $review;
-    }
-
-    /**
      * @return mixed
      */
     public function getCompanyReply()
     {
         return $this->companyReply;
-    }
-
-    /**
-     * @param mixed $companyReply
-     */
-    public function setCompanyReply($companyReply)
-    {
-        $this->companyReply = $companyReply;
     }
 
     /**
@@ -86,27 +67,11 @@ class ReviewTransformer
     }
 
     /**
-     * @param mixed $createdAt
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
      * @return mixed
      */
     public function getReviewLink()
     {
         return $this->reviewLink;
-    }
-
-    /**
-     * @param mixed $reviewLink
-     */
-    public function setReviewLink($reviewLink)
-    {
-        $this->reviewLink = $reviewLink;
     }
 
     /**
@@ -118,11 +83,11 @@ class ReviewTransformer
     }
 
     /**
-     * @param mixed $rating
+     * @return mixed
      */
-    public function setRating($rating)
+    public function getAuthor()
     {
-        $this->rating = $rating;
+        return $this->author;
     }
 
     /**
@@ -148,12 +113,13 @@ class ReviewTransformer
      */
     public function transform($review)
     {
-        $reviewObj = new self;
-        $reviewObj->setTitle($review['title']);
-        $reviewObj->setReview($review['text']);
-        $reviewObj->setCompanyReply($review['companyReply']['text']);
-        $reviewObj->setRating($review['stars']);
-        $reviewObj->setCreatedAt($review['createdAt']);
+        $reviewObj          = new self;
+        $reviewObj->title        = $review['title'];
+        $reviewObj->review       = $review['text'];
+        $reviewObj->companyReply = $review['companyReply']['text'];
+        $reviewObj->rating       = $review['stars'];
+        $reviewObj->createdAt    = $review['createdAt'];
+        $reviewObj->author       = trim($review['consumer']['displayName']);
 
         return $reviewObj;
     }

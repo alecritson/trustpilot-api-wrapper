@@ -13,6 +13,11 @@ class Reviews
     private $client;
 
     /**
+     * @var array
+     */
+    private $responses = [];
+
+    /**
      * @param ApiWrapper $client
      */
     public function __construct(ApiWrapper $client)
@@ -51,15 +56,7 @@ class Reviews
      */
     public function getTrustScore($queryParams = [])
     {
-        $url = '/v1/business-units/' . $this->client->getBusinessUnitId();
-
-        $ratings = $this->client->getClient()->request(
-            'GET',
-            $url,
-            array_merge($this->client->getDefaultHeaders(), ['query' => $queryParams])
-        );
-
-        $data = json_decode($ratings->getBody()->getContents(), true);
+        $data = $this->getBusinessUnit($queryParams);
 
         return $data['trustScore'];
     }
@@ -71,16 +68,45 @@ class Reviews
      */
     public function getStarRating($queryParams = [])
     {
-        $url = '/v1/business-units/' . $this->client->getBusinessUnitId();
-
-        $ratings = $this->client->getClient()->request(
-            'GET',
-            $url,
-            array_merge($this->client->getDefaultHeaders(), ['query' => $queryParams])
-        );
-
-        $data = json_decode($ratings->getBody()->getContents(), true);
+        $data = $this->getBusinessUnit($queryParams);
 
         return $data['stars'];
+    }
+
+    /**
+     * @param array $queryParams
+     *
+     * @return mixed
+     */
+    public function getTotalNumberOfReviews($queryParams = [])
+    {
+        $data = $this->getBusinessUnit($queryParams);
+
+        return $data['numberOfReviews']['total'];
+    }
+
+    /**
+     * @param array $queryParams
+     *
+     * @return mixed
+     */
+    private function getBusinessUnit($queryParams = [])
+    {
+        if (isset($this->responses['business_units'])) {
+            $response = $this->responses['business_units'];
+        } else {
+            $url = '/v1/business-units/' . $this->client->getBusinessUnitId();
+
+            $ratings = $this->client->getClient()->request(
+                'GET',
+                $url,
+                array_merge($this->client->getDefaultHeaders(), ['query' => $queryParams])
+            );
+
+            $response                          = $ratings->getBody()->getContents();
+            $this->responses['business_units'] = $response;
+        }
+
+        return json_decode($response, true);
     }
 }
