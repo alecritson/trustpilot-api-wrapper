@@ -19,6 +19,10 @@ class ReviewTransformer
     /**
      * @var
      */
+    private $companyReplyCreatedAt;
+    /**
+     * @var
+     */
     private $createdAt;
     /**
      * @var
@@ -91,6 +95,14 @@ class ReviewTransformer
     }
 
     /**
+     * @return mixed
+     */
+    public function getCompanyReplyCreatedAt()
+    {
+        return $this->companyReplyCreatedAt;
+    }
+
+    /**
      * @param array $reviews
      *
      * @return array
@@ -113,13 +125,14 @@ class ReviewTransformer
      */
     public function transform($review)
     {
-        $reviewObj          = new self;
-        $reviewObj->title        = $review['title'];
-        $reviewObj->review       = $review['text'];
-        $reviewObj->companyReply = $review['companyReply']['text'];
-        $reviewObj->rating       = $review['stars'];
-        $reviewObj->createdAt    = $review['createdAt'];
-        $reviewObj->author       = trim($review['consumer']['displayName']);
+        $reviewObj                        = new self;
+        $reviewObj->title                 = $review['title'];
+        $reviewObj->review                = $review['text'];
+        $reviewObj->companyReply          = $review['companyReply']['text'];
+        $reviewObj->companyReplyCreatedAt = $review['companyReply']['createdAt'];
+        $reviewObj->rating                = $review['stars'];
+        $reviewObj->createdAt             = $review['createdAt'];
+        $reviewObj->author                = trim($review['consumer']['displayName']);
 
         return $reviewObj;
     }
